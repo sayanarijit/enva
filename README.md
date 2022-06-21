@@ -5,7 +5,8 @@ A simple, consolidated `settings.py`.
 Usage:
 
 ```python
-# export ENVIRONMENT=STAGING
+# export ENVIRONMENT=PRODUCTION
+# export DATABASE_URL="postgres://prod:prod@localhost:5432/postgres"
 
 import enva
 
@@ -20,5 +21,5 @@ DATABASE_URL = env(
 )
 
 print(DATABASE_URL)
-# postgres://stage:stage@localhost:5432/postgres
+# postgres://prod:prod@localhost:5432/postgres
 ```

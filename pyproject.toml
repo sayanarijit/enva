@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "enva"
+version = "0.1.0"
+description = "A simple, consolidated settings.py"
+authors = ["Arijit Basu <sayanarijit@gmail.com>"]
+license = 'MIT'
+homepage = 'https://github.com/sayanarijit/enva'
+readme = 'README.md'
+keywords = ['consolidated', 'environment', 'settings.py']
+classifiers = [
+  'Development Status :: 4 - Beta',
+  'Intended Audience :: Developers',
+  'Intended Audience :: Information Technology',
+  'Intended Audience :: Other Audience',
+  'License :: OSI Approved :: MIT License',
+  'Natural Language :: English',
+  'Programming Language :: Python :: 3',
+  'Programming Language :: Python :: 3.5',
+  'Programming Language :: Python :: 3.6',
+  'Programming Language :: Python :: 3.7',
+  'Programming Language :: Python :: 3.8',
+  'Topic :: Utilities',
+  'Topic :: Software Development',
+  'Operating System :: MacOS',
+  'Operating System :: Unix',
+  'Operating System :: POSIX',
+  'Operating System :: Microsoft',
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^22.3.0"
+pynvim = "^0.4.3"
+flake8 = "^4.0.1"
+pylint = "^2.14.3"
+pytest-cov = "^3.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest]
+addopts = '--cov --cov-report=html --cov-fail-under=100'

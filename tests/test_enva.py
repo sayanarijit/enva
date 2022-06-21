@@ -29,7 +29,7 @@ def test_undefined():
 
 
 # export ENVIRONMENT=NON_EXISTENT
-@patch.dict(environ, {}, clear=True)
+@patch.dict(environ, {"ENVIRONMENT": "NON_EXISTENT"}, clear=True)
 def test_default():
 
     env = enva.define(

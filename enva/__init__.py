@@ -1,7 +1,7 @@
 __version__ = "0.1.0"
 
 
-from os import environ
+from os import environ as _environ
 
 
 def define(var="ENVIRONMENT", **kwargs):
@@ -12,7 +12,7 @@ def define(var="ENVIRONMENT", **kwargs):
         **kwargs: keys mapping to the names of the different environments.
     """
 
-    env = environ.get(var)
+    env = _environ.get(var)
     keys = {val: key for key, val in kwargs.items()}
     key = keys.get(env)
 
@@ -31,6 +31,24 @@ def define(var="ENVIRONMENT", **kwargs):
         if val is None and default is None:
             raise KeyError("default")
 
+        if isinstance(val, FromEnv):
+            val = val.val()
+
         return default if val is None else val
 
     return env
+
+
+class FromEnv:
+    def __init__(self, var, type=str):
+        self.var = var
+        self.type = type
+
+    def val(self):
+        return self.type(_environ[self.var])
+
+
+def environ(var, type=str):
+    """Parse value from environment variable if the environment matches."""
+
+    return FromEnv(var, type=type)

@@ -2,7 +2,7 @@
 
 A simple, consolidated `settings.py`.
 
-Why? Read my opinion on [Configuration, Environments and Secrets](https://arijitbasu.in/notes/Configuration,%20Environments%20and%20Secrets/).
+Why? Read my opinion on [Configuration, Environments and Secrets](https://arijitbasu.in/notes/Configuration%20Environments%20and%20Secrets/).
 
 Usage:
 

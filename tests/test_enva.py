@@ -1,7 +1,9 @@
-import enva
-import pytest
 from os import environ
 from unittest.mock import patch
+
+import pytest
+
+import enva
 
 
 # unset ENVIRONMENT
@@ -54,11 +56,34 @@ def test_default():
 
 # export ENVIRONMENT=DEVELOPMENT
 @patch.dict(environ, {"ENVIRONMENT": "DEVELOPMENT"}, clear=True)
-def test_dev():
+def test_dev_kwarg():
 
     env = enva.define(
         "ENVIRONMENT", dev="DEVELOPMENT", stage="STAGING", prod="PRODUCTION"
     )
+
+    DATABASE_URL = env(
+        "postgres://localhost:5432/postgres",  # Default value
+        dev="postgres://dev:dev@localhost:5432/postgres",  # When $ENVIRONMENT == DEVELOPMENT
+        stage="postgres://stage:stage@localhost:5432/postgres",  # When $ENVIRONMENT == STAGING
+        prod="postgres://prod:prod@localhost:5432/postgres",  # When $ENVIRONMENT == PRODUCTION
+    )
+
+    assert DATABASE_URL == "postgres://dev:dev@localhost:5432/postgres"
+
+    DATABASE_URL = env(
+        "postgres://localhost:5432/postgres",  # Default value
+        dev="postgres://dev:dev@localhost:5432/postgres",  # When $ENVIRONMENT == DEVELOPMENT
+    )
+
+    assert DATABASE_URL == "postgres://dev:dev@localhost:5432/postgres"
+
+
+# export ENVIRONMENT=DEVELOPMENT
+@patch.dict(environ, {"ENVIRONMENT": "dev"}, clear=True)
+def test_dev_arg():
+
+    env = enva.define("ENVIRONMENT", "dev", "stage", "prod")
 
     DATABASE_URL = env(
         "postgres://localhost:5432/postgres",  # Default value

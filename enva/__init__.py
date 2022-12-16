@@ -4,13 +4,17 @@ __version__ = "0.1.0"
 from os import environ as _environ
 
 
-def define(var="ENVIRONMENT", **kwargs):
+def define(var="ENVIRONMENT", *args, **kwargs):
     """Define your environments.
 
     Arguments:
         var: Name of the environment variable to differentiate between environments.
         **kwargs: keys mapping to the names of the different environments.
     """
+
+    for arg in args:
+        if arg not in kwargs:
+            kwargs[arg] = arg
 
     env = _environ.get(var)
     keys = {val: key for key, val in kwargs.items()}

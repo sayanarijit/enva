@@ -14,6 +14,7 @@ import enva
 
 # You can define as many environments as you want.
 env = enva.define("ENVIRONMENT", dev="DEVELOPMENT", stage="STAGING", prod="PRODUCTION")
+# Or env = enva.define("ENVIRONMENT", "dev", "stage", "prod")
 
 DATABASE_URL = env(
     "postgres://localhost:5432/postgres",                    # Default value
